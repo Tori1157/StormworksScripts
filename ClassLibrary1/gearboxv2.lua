@@ -13,6 +13,7 @@ function onTick()
     local gearSelected = input.getNumber(5)
 
     local ratioBool = false
+    local clutchEnabled = true
 
     -- Reset gear selection once. Should do class, but fuck that, Lua doesn't properly support it, ueh!?
     output.setBool(1, false)
@@ -35,6 +36,7 @@ function onTick()
     Bool 7      |   9:5 Ratio (1)
     Bool 8      |   1:-1 Ratio (Reverse)
     Bool 9      |   2:1 Ratio (High Gear)
+    Bool 10     |   Clutch Enabled or Not
     Number 1    |   High Gear Number 0-1 (?)
     Number 2    |   Toggle Clutch 0-1 (?)
     Number 3    |   Clutch Amount 0.0-1
@@ -101,8 +103,8 @@ function onTick()
 
     -- Eighth Gear
     if gearSelected == 8 then
-        output.setBool(1, true)
         output.setBool(2, true)
+        output.setBool(3, true)
         output.setBool(5, true)
     end
 
@@ -114,19 +116,21 @@ function onTick()
 
     -- Tenth Gear
     if gearSelected == 10 then
+        output.setBool(2, true)
         output.setBool(5, true)
         output.setBool(6, true)
-        output.setBool(1, true)
     end
 
     -- Set the clutch and value of clutch, clutch dem fuckers
     if gearSelected == 0 or toggleClutch == 0 then
         clutchAmount = 0.0
+        clutchEnabled = false
     end
 
     -- Send out last remaining data, this can be changed outside of gears.
     --      Allows for doing variable clutching, how you know... do in manual cars. You do know how to drive a manual? Right? -._
     output.setBool(9, ratioBool)
+    output.setBool(10, clutchEnabled)
     output.setNumber(3, clutchAmount)
     output.setNumber(5, gearSelected)
 end
