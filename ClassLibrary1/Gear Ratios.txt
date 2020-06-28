@@ -22,7 +22,7 @@ Fifth Gear
 
 Sixth Gear
     3:2
-    6:2
+    6:5
 
 Seventh Gear
     9:5
@@ -44,9 +44,12 @@ Tenth Gear
 High Gear
     2:1
 
+
 --[[ Total ]]--
 
 Gearboxes: 8
-6:5 | 3
-3:2 | 2
-9:5 | 1
+6:5     | 3
+3:2     | 2
+9:5     | 1
+2:1     | 1
+1:-1    | 1 (combo with 1:1)

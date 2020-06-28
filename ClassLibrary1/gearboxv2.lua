@@ -61,6 +61,7 @@ function onTick()
 
     -- First Gear
     if gearSelected == 1 then
+        -- We don't really need this, but if someone want to connect up buttons, lights or some other shit... *shrugs*
         output.setBool(1, true)
     end
 
@@ -89,8 +90,8 @@ function onTick()
 
     -- Sixth Gear
     if gearSelected == 6 then
+        output.setBool(2, true)
         output.setBool(5, true)
-        output.setBool(1, true)
     end
 
     -- Seventh Gear
