@@ -1,0 +1,52 @@
+
+Reverse Gear
+    1:-1
+
+First Gear
+    1:1
+
+Second Gear
+    6:5
+
+Third Gear
+    6:5
+    6:5
+
+Fourth Gear
+    3:2
+
+Fifth Gear
+    6:5
+    6:5
+    6:5
+
+Sixth Gear
+    3:2
+    6:2
+
+Seventh Gear
+    9:5
+
+Eighth Gear
+    3:2
+    6:5
+    6:5
+
+Ninth Gear
+    3:2
+    3:2
+
+Tenth Gear
+    3:2
+    3:2
+    6:5
+
+High Gear
+    2:1
+
+--[[ Total ]]--
+
+Gearboxes: 8
+6:5 | 3
+3:2 | 2
+9:5 | 1
