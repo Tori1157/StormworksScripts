@@ -21,6 +21,7 @@
 
     if average < 20 then
         output.setNumber(2, 1)
+    end
 
     output.setNumber(1, amount / added)
 end
