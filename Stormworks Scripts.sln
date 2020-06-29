@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{3D663481-1CDB-4D34-A810-50D7D216DA53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{42226FD3-3B83-4932-99CA-59B8D8093CD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StormworksScripts", "StormworksScripts\StormworksScripts.csproj", "{42226FD3-3B83-4932-99CA-59B8D8093CD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -38,13 +38,16 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Class1.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="average amount.lua" />
-      <Content Include="gearbox.lua" />
+      <Content Include="booltonum.lua" />
+      <Content Include="clampgears.lua" />
+      <Content Include="Gear Ratios.txt" />
       <Content Include="gearboxv2.lua" />
+      <Content Include="mobdebug.lua" />
+      <Content Include="numtobool.lua" />
       <Content Include="subtraction of gears.lua" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
