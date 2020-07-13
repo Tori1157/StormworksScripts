@@ -1,12 +1,16 @@
-﻿function onTick()
+﻿cutoffStarted = false
+
+function onTick()
 	local throttle = input.getNumber(1)
 	local engineRps = input.getNumber(2)
 	local clutch = input.getNumber(3)
+	local engineTemp = input.getNumber(4)
 
 	local rpsThreshold = property.getNumber("RPS Threshold")
 	local idleThrottle = property.getNumber("Idle Throttle")
 	local idleRpsTarget = property.getNumber("Idle RPS Target")
 	local useAutoClutch = property.getBool("Individual Clutch Control")
+	local engineTempCutoff = property.getNumber("Engine Temperature Cutoff")
 	
 	local key = input.getBool(1)
 
@@ -41,6 +45,17 @@
 		if engineRps < (idleRpsTarget - 5) and throttle <= idleThrottle then
 			output.setNumber(1, 1.0)
 		else output.setNumber(1, throttle) end
+
+		if engineTemp > engineTempCutoff then
+			cutoffStarted = true
+			output.setBool(1, false)
+			output.setBool(2, true)
+			output.setNumber(1, 0.0)
+		elseif engineTemp < engineTempCutoff and cutoffStarted then
+			cutoffStarted = false
+			output.setNumber(1, throttle)
+			output.setBool(2, false)
+		end
 		
 		output.setNumber(2, clutch)
 	else
