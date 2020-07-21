@@ -1,43 +1,55 @@
-﻿function onTick()
-	local doTooltip = property.getBool("Toggle Tooltip")
+﻿hasInitialized = false
+switchTable = {
+	[1] = false,
+	[2] = false,
+	[3] = false,
+	[4] = false,
+	[5] = false,
+	[6] = false,
+	[7] = false,
+	[8] = false,
+	[9] = false,
+	[10] = false,
+	[11] = false,
+	[12] = false,
+	[13] = false,
+	[14] = false,
+	[15] = false,
+	[16] = false
+}
 
+function onTick()
+	if not hasInitialized then Initialization() end
+
+	-- Iterate through inputs
 	for i = 16, 1, -1 do
-		local boolInput = input.getBool(i)
+		local sniff = input.getBool(i)
 
-		if doTooltip then
-			local newNum = Switch(i)
-			output.setBool(newNum, boolInput)
+		if sniff then
+			local b = switchTable[i]
+
+			-- Switch between T or F, worry not input should be single-tick pulse.
+			if b then 
+				switchTable[i] = false
+			else 
+				switchTable[i] = true 
+			end
 		end
-		
-		output.setBool(i, boolInput)
+
+		output.setBool(i, switchTable[i])
 	end
 end
 
--- Using a table is 600% faster then doing 16 + i.
-function Switch(number)
-	local switchNums = {
-	[1] = 17,
-	[2] = 18,
-	[3] = 19,
-	[4] = 20,
-	[5] = 21,
-	[6] = 22,
-	[7] = 23,
-	[8] = 24,
-	[9] = 25,
-	[10] = 26,
-	[11] = 27,
-	[12] = 28,
-	[13] = 29,
-	[14] = 30,
-	[15] = 31,
-	[16] = 32
-	}
+-- Set default values
+function Initialization()
+	for k, v in ipairs(switchTable) do
+		if k == nil then return end
+		local prop = property.getBool("Initial Input #"..k) or nil
 
-	for key, value in ipairs(switchNums) do
-		if key == number then return value end
+		if prop ~= nil then
+			switchTable[k] = prop
+		end
 	end
-	
-	-- Default, faster to send back same num than nil
-	return number
+
+	hasInitialized = true
 end
