@@ -1,55 +1,58 @@
 ﻿hasInitialized = false
-switchTable = {
-	[1] = false,
-	[2] = false,
-	[3] = false,
-	[4] = false,
-	[5] = false,
-	[6] = false,
-	[7] = false,
-	[8] = false,
-	[9] = false,
-	[10] = false,
-	[11] = false,
-	[12] = false,
-	[13] = false,
-	[14] = false,
-	[15] = false,
-	[16] = false
-}
+switchTable = {}
+tableKeys = 32
+lastPress = 0
+
+useAll = property.getBool("Use 32 Booleans")
 
 function onTick()
 	if not hasInitialized then Initialization() end
 
 	-- Iterate through inputs
-	for i = 16, 1, -1 do
+	for i = tableKeys, 1, -1 do
 		local sniff = input.getBool(i)
 
-		if sniff then
-			local b = switchTable[i]
+		-- Button Press & New button
+		if sniff and i ~= lastPress then
+			local f = switchTable[i]
 
-			-- Switch between T or F, worry not input should be single-tick pulse.
-			if b then 
-				switchTable[i] = false
-			else 
-				switchTable[i] = true 
-			end
+			-- Set new value, doubles as init table insert
+			switchTable[i] = not f
+			lastPress = i
+			-- Reset, button not being pressed anymore.
+		elseif not sniff and i == lastPress then
+			lastPress = 0
 		end
 
+		-- Send out booleans from tableKeys
 		output.setBool(i, switchTable[i])
 	end
+	output.setNumber(1, tableKeys)
 end
 
 -- Set default values
 function Initialization()
-	for k, v in ipairs(switchTable) do
-		if k == nil then return end
-		local prop = property.getBool("Initial Input #"..k) or nil
+	local pos = 1
 
-		if prop ~= nil then
-			switchTable[k] = prop
+	-- Runs infinitely in game, because non existent bools return false,
+	-- so the break on line 45 does nothing. And with that, i bid farewell... For now. Back to C# we go.
+	while true do
+		local p = property.getBool("Default Output #"..pos)
+
+		-- Property non-existent, break loop.
+		if p == nil then
+			pos = pos - 1
+			break
 		end
+
+		-- Insert default values to table
+		switchTable[#switchTable + pos] = p
+		pos = pos + 1
 	end
+
+	-- Set bool amount
+	if not useAll then
+		tableKeys = pos end
 
 	hasInitialized = true
 end
